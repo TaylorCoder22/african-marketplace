@@ -9,8 +9,8 @@ const ItemList = () => {
     useEffect(() => {
         getData()
         getSaleData()
-    }, [])
-
+    }, [getData, getSaleData])
+   
     console.log(items)
     console.log(tempItem)
 
@@ -19,6 +19,7 @@ const ItemList = () => {
         <StyledLink to='/addItem'>Add Listing</StyledLink>
         {items.map((item, i) => {
             <Item key={i} item={item} />
+            return items
         })}
         </>
     )

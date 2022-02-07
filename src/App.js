@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import ProtectedRoute from './helpers/ProtectedRoute'
 import TokenRoute from './helpers/TokenRoute'
 import Home from './components/Home'
@@ -12,7 +12,11 @@ import Item from './components/Item'
 import Login from './components/Login'
 import {axiosWithAuth} from './helpers/axiosWithAuth'
 import {useLocalStorage} from './hooks/useLocalStorage'
-import {useEffect} from 'react'
+
+import Container from './components/StyledComponents/ContainerStyled'
+import HeaderOne from './components/StyledComponents/H1Styled'
+import Nav from './components/StyledComponents/NavStyled'
+import StyledLink from './components/StyledComponents/LinkStyled'
 import './App.css'
 
 function App(){
@@ -47,10 +51,6 @@ function App(){
     .catch((err) => console.log(err))
   }
 
-  useEffect(() => {
-    getLocationData()
-  }, [])
-
   const logout = () => {
     localStorage.removeItem('token')
     window.location.href = '/'
@@ -82,7 +82,7 @@ function App(){
                 <StyledLink to='listings'>Listings</StyledLink>
               </span>
             </Nav>
-            <Switch>
+            <Routes>
               <Route exact path='/' component={Home}></Route>
               <TokenRoute path='/Login' component={Login} />
               <Route path='/Signup' component={SignUpForm} />
@@ -94,7 +94,7 @@ function App(){
                 <ProtectedRoute path='/addItem' component={ItemForm} />
                 <ProtectedRoute path='details' component={Item} />  
               </ItemContext.Provider>
-            </Switch>
+            </Routes>
           </div>
         </Router>
       </header>

@@ -1,9 +1,9 @@
 import React from 'react'
-import {Route, Redirect} from 'react-router'
+import {Route} from 'react-router'
 
 const TokenRoute = ({component, ...rest}) => {
     if(localStorage.getItem('token')){
-        return (<Redirect to='/' />)
+        return (<Route to='/' />)
     }else{
         return (<Route component={component} {...rest} />)
     }
